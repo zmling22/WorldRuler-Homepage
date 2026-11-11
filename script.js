@@ -49,9 +49,11 @@
     return tab;
   }));
   document.querySelectorAll('[data-count]').forEach((label) => {
-    label.textContent = label.dataset.count === 'all' ? examples.length : examples.filter((example) => example.category === label.dataset.count).length;
+    const count = label.dataset.count === 'all' ? examples.length : examples.filter((example) => example.category === label.dataset.count).length;
+    label.textContent = count;
+    label.closest('button').hidden = count === 0;
   });
-  $('#sample-count').textContent = `${examples.length} paired examples`;
+  $('#sample-count').textContent = `${examples.length} selected examples`;
   const off = $('#video-off');
   const on = $('#video-on');
   const playButton = $('#pair-play');
@@ -61,38 +63,54 @@
   let operation = 0;
   let playing = false;
   let requestedTime = 0;
+  const isSingle = () => activeCase.mode === 'single';
+  const activeVideos = () => isSingle() ? [on] : [off, on];
+  const primaryVideo = () => isSingle() ? on : off;
   const format = (time) => `${Math.floor(time / 60)}:${String(Math.floor(time % 60)).padStart(2, '0')}`;
-  function renderTime() { const t = off.currentTime || 0; seek.value = t; seek.setAttribute('aria-valuetext', `${t.toFixed(1)} of ${activeCase.duration} seconds`); $('#pair-time').textContent = `${format(t)} / ${format(activeCase.duration)}`; }
-  function pausePair() { operation++; playing = false; off.pause(); on.pause(); playButton.innerHTML = '<span aria-hidden="true">▷</span> Play both'; }
+  function renderPlayButton() { playButton.innerHTML = `<span aria-hidden="true">${playing ? 'Ⅱ' : '▷'}</span> ${playing ? 'Pause' : 'Play'} ${isSingle() ? 'video' : 'both'}`; }
+  function renderTime() { const t = primaryVideo().currentTime || 0; seek.value = t; seek.setAttribute('aria-valuetext', `${t.toFixed(1)} of ${activeCase.duration} seconds`); $('#pair-time').textContent = `${format(t)} / ${format(activeCase.duration)}`; }
+  function pausePair() { operation++; playing = false; off.pause(); on.pause(); renderPlayButton(); }
   async function playPair() {
     const myOperation = ++operation;
     playing = true;
-    playButton.innerHTML = '<span aria-hidden="true">Ⅱ</span> Pause both';
+    renderPlayButton();
     $('#pair-message').textContent = '';
     try {
-      await Promise.all([off.play(), on.play()]);
+      await Promise.all(activeVideos().map((video) => video.play()));
       if (myOperation !== operation) return;
-      if (Math.abs(on.currentTime - off.currentTime) > 0.15) on.currentTime = off.currentTime;
+      if (!isSingle() && Math.abs(on.currentTime - off.currentTime) > 0.15) on.currentTime = off.currentTime;
     } catch (error) {
       if (myOperation !== operation) return;
       pausePair();
       if (error.name !== 'AbortError') $('#pair-message').textContent = 'Playback could not start. Please try again, or use the individual video links below.';
     }
   }
-  playButton.addEventListener('click', () => { if (playing) pausePair(); else { if (off.ended || off.currentTime >= activeCase.duration - .15) { off.currentTime = 0; on.currentTime = 0; } playPair(); } });
-  $('#pair-reset').addEventListener('click', () => { pausePair(); requestedTime = 0; off.currentTime = 0; on.currentTime = 0; renderTime(); });
-  seek.addEventListener('input', () => { requestedTime = Number(seek.value); [off, on].forEach((v) => { if (v.readyState >= 1) v.currentTime = requestedTime; else v.load(); }); $('#pair-time').textContent = `${format(requestedTime)} / ${format(activeCase.duration)}`; seek.setAttribute('aria-valuetext', `${requestedTime.toFixed(1)} of ${activeCase.duration} seconds`); });
+  playButton.addEventListener('click', () => { if (playing) pausePair(); else { if (primaryVideo().ended || primaryVideo().currentTime >= activeCase.duration - .15) activeVideos().forEach((v) => { v.currentTime = 0; }); playPair(); } });
+  $('#pair-reset').addEventListener('click', () => { pausePair(); requestedTime = 0; activeVideos().forEach((v) => { v.currentTime = 0; }); renderTime(); });
+  seek.addEventListener('input', () => { requestedTime = Number(seek.value); activeVideos().forEach((v) => { if (v.readyState >= 1) v.currentTime = requestedTime; else v.load(); }); $('#pair-time').textContent = `${format(requestedTime)} / ${format(activeCase.duration)}`; seek.setAttribute('aria-valuetext', `${requestedTime.toFixed(1)} of ${activeCase.duration} seconds`); });
   [off, on].forEach((v) => {
     v.addEventListener('loadedmetadata', () => { if (requestedTime > 0) v.currentTime = Math.min(requestedTime, v.duration - .05); });
     v.addEventListener('error', () => { pausePair(); $('#pair-message').textContent = 'This video could not load. Try the individual video links below.'; });
     v.addEventListener('ended', pausePair);
+    v.addEventListener('timeupdate', () => {
+      if (v !== primaryVideo()) return;
+      renderTime();
+      if (!isSingle() && playing && on.readyState >= 2 && Math.abs(on.currentTime - off.currentTime) > .25) on.currentTime = off.currentTime;
+    });
   });
-  off.addEventListener('timeupdate', () => { renderTime(); if (playing && on.readyState >= 2 && Math.abs(on.currentTime - off.currentTime) > .25) on.currentTime = off.currentTime; });
   const tabs = [...document.querySelectorAll('.case-tab')];
   function selectCase(tab) {
     pausePair();
     activeCase = cases[tab.dataset.case];
     requestedTime = 0;
+    renderPlayButton();
+    $('.comparison-videos').classList.toggle('single-video', isSingle());
+    off.closest('figure').hidden = isSingle();
+    $('#off-link').hidden = isSingle();
+    $('#pair-reset').setAttribute('aria-label', isSingle() ? 'Restart video' : 'Restart both comparison videos');
+    $('.showcase-note').textContent = isSingle()
+      ? 'Rule-enabled generated video from the training-free implementation. This is a single demonstration, not a paired comparison or a trained attribute-writer result.'
+      : 'Both panels show generated video from the training-free implementation. These examples are not results of the trained attribute writer.';
     tabs.forEach((item) => { const selected = item === tab; item.classList.toggle('active', selected); item.setAttribute('aria-selected', String(selected)); item.tabIndex = selected ? 0 : -1; });
     panel.setAttribute('aria-labelledby', tab.id);
     $('#case-title').textContent = activeCase.heading;
@@ -101,6 +119,7 @@
     $('#case-caption').textContent = activeCase.caption;
     $('#pair-message').textContent = '';
     [['off', off, 'disabled'], ['on', on, 'enabled']].forEach(([state, video, word]) => {
+      if (isSingle() && state === 'off') { video.removeAttribute('src'); video.load(); return; }
       const src = `assets/videos/${activeCase.prefix}-${state}.mp4`;
       video.poster = `assets/images/${activeCase.prefix}-${state}.webp`;
       video.src = src;
@@ -131,7 +150,7 @@
     tabs.forEach((tab) => { tab.hidden = filter.dataset.filter !== 'all' && tab.dataset.category !== filter.dataset.filter; });
     const visible = tabs.filter((tab) => !tab.hidden);
     if (visible.length && !visible.some((tab) => tab.dataset.case === activeCase.id)) selectCase(visible[0]);
-    $('#sample-count').textContent = `${visible.length} of ${examples.length} paired examples`;
+    $('#sample-count').textContent = `${visible.length} of ${examples.length} selected examples`;
   }));
 
   const walkthrough = $('#walkthrough-video');
