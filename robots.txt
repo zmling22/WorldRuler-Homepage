@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://zmling22.github.io/WorldRuler-Homepage/sitemap.xml

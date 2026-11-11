@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14141a">
+  <meta name="description" content="WorldRuler connects executable rules, persistent world states, and visual generation to build interactive worlds under configurable rules.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="WorldRuler — Interactive World Modeling under Configurable Rules">
+  <meta property="og:description" content="Define the rules. Ground their effects. Preserve the world. Explore WorldRuler and the RuleVerse dataset.">
+  <meta property="og:url" content="https://zmling22.github.io/WorldRuler-Homepage/">
+  <meta property="og:image" content="https://zmling22.github.io/WorldRuler-Homepage/assets/images/social.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://zmling22.github.io/WorldRuler-Homepage/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  <title>WorldRuler — Interactive World Modeling under Configurable Rules</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="WorldRuler home"><span class="lab-mark">ALAYA LAB</span><span class="brand-divider"></span>WorldRuler<span class="brand-dot">.</span></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="navigation">Menu <span aria-hidden="true">＋</span></button>
+    <nav id="navigation" aria-label="Main navigation">
+      <a href="#overview">Overview</a><a href="#method">Method</a><a href="#showcase">Showcase</a><a href="#ruleverse">RuleVerse</a>
+    </nav>
+    <a class="nav-cta" href="#resources">Resources <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <video id="hero-video" class="hero-video" muted loop playsinline preload="none" poster="assets/images/hero.webp" data-src="assets/videos/hero.mp4" aria-hidden="true" tabindex="-1"></video>
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <p class="eyebrow"><span class="accent-dot"></span> RULE-GOVERNED GENERATIVE WORLDS</p>
+        <h1 id="hero-title">World<span>Ruler</span><span class="title-dot">.</span></h1>
+        <p class="hero-subtitle">Interactive World Modeling<br>under <em>Configurable Rules</em></p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#showcase"><span aria-hidden="true">▷</span> Explore the demos</a>
+          <span class="button button-pending">Paper <span class="coming-soon">Coming soon</span></span>
+          <span class="button button-pending">Code <span class="coming-soon">Coming soon</span></span>
+        </div>
+      </div>
+      <div class="hero-bottom"><span>YOUR WORLD. YOUR RULES.</span><a href="#overview">Discover WorldRuler <span aria-hidden="true">↓</span></a><button id="hero-toggle" class="motion-toggle" aria-label="Play background video"><span aria-hidden="true">▷</span><span class="motion-label">Play motion</span></button></div>
+      <p class="hero-credit">Illustrative environment · H3 reference video</p>
+    </section>
+
+    <section class="authors container" aria-label="Authors and affiliations">
+      <p class="author-names"><a href="https://zmling22.github.io/">Mingliang Zhai<sup>1,2</sup></a><span>Yuwei Wu<sup>2,†</sup></span><span>Yunde Jia<sup>2,†</sup></span><span>Chuanhao Li<sup>1,†</sup></span><span>Kaipeng Zhang<sup>1,†</sup></span></p>
+      <p class="affiliations"><span><sup>1</sup> ALAYA LAB</span><span><sup>2</sup> BEIJING INSTITUTE OF TECHNOLOGY</span></p>
+      <p class="author-note">† Corresponding authors</p>
+    </section>
+
+    <section class="section container overview" id="overview">
+      <div class="split-layout">
+        <div class="section-copy">
+          <p class="eyebrow">01 / THE IDEA</p>
+          <h2>A world that follows<br><em>your rules.</em></h2>
+          <p class="lead">Change what an action means.<br>Keep what the world remembers.</p>
+          <p>A switch can open a door before it comes into view. A defeated monster can leave a key that is still there after you return. Generative worlds need to preserve the logic behind these interactions—and make its consequences visible.</p>
+          <p>WorldRuler connects rule execution, video generation, and perceptual feedback through an executable 3D rule graph.</p>
+        </div>
+        <figure class="figure-block">
+          <button class="figure-button" data-lightbox="assets/images/persistence.webp" data-caption="Rule-state persistence — a schematic of saving rules and world states, then continuing the interaction." aria-label="Enlarge the rule-state persistence illustration"><img src="assets/images/persistence.webp" alt="A schematic rule chain: defeat a monster, collect its key, and open a door, with the rules and world state saved together." width="2022" height="778" loading="lazy"><span class="expand-mark" aria-hidden="true">↗</span></button>
+          <figcaption><span>RULE-STATE PERSISTENCE</span> Save the rules and the state behind the next action. Conceptual illustration.</figcaption>
+        </figure>
+      </div>
+      <div class="principles">
+        <article><span class="mini-label">01 / PERSIST</span><h3>Resume the world.</h3><p>Restore rule definitions, dependencies, and object states together—not just the last image.</p></article>
+        <article><span class="mini-label">02 / GROUND</span><h3>Find the right object.</h3><p>Bind rule entities to visual instances, including objects that appear only later.</p></article>
+        <article><span class="mini-label">03 / REALIZE</span><h3>Make the state visible.</h3><p>Guide designated attributes while preserving compatible appearance, motion, and unrelated content.</p></article>
+      </div>
+    </section>
+
+    <section class="section section-tinted" id="method">
+      <div class="container">
+        <div class="section-heading heading-inline"><div><p class="eyebrow">02 / THE METHOD</p><h2>Execute the rule.<br><em>Realize the consequence.</em></h2></div><p class="section-summary">A persistent rule graph and a visual generation loop connect symbolic state to what you see.</p></div>
+        <figure class="figure-block method-figure">
+          <button class="figure-button" data-lightbox="assets/images/method.webp" data-caption="WorldRuler architecture. The diagram explains the proposed mechanism; embedded scene images illustrate the rule chain." aria-label="Enlarge the WorldRuler architecture"><img src="assets/images/method.webp" alt="WorldRuler method: executable 3D rule graph, dynamic object binding, rule-guided generation, and perceptual feedback." width="2200" height="917" loading="lazy"><span class="expand-mark" aria-hidden="true">↗</span></button>
+          <figcaption><span>ARCHITECTURE</span> Rule execution → object binding → video generation → perceptual feedback. Method schematic.</figcaption>
+        </figure>
+        <div class="principles method-steps">
+          <article><span class="mini-label">RULE GRAPH</span><h3>Persistent, executable state.</h3><p>Rules, dependencies, object identities, attributes, and spatial information live in a shared representation.</p></article>
+          <article><span class="mini-label">DYNAMIC BINDING</span><h3>State before first sight.</h3><p>Stored rule targets constrain newly visible objects from their first appearance, with feedback refining correspondences.</p></article>
+          <article><span class="mini-label">ATTRIBUTE REPLACEMENT</span><h3>Local, targeted control.</h3><p>A frozen reader estimates object attributes. A trained writer applies rule-directed corrections during generation.</p></article>
+        </div>
+        <details class="method-detail"><summary><span>A closer look at attribute replacement & paired training</span><span class="detail-symbol" aria-hidden="true">＋</span></summary><div class="detail-content"><p>Counterfactual reconstruction and bidirectional attribute swapping train the replacement operator using paired videos. The video generator and attribute reader remain frozen.</p><button class="figure-button" data-lightbox="assets/images/replacement.webp" data-caption="Local attribute replacement and paired training. Solid arrows denote computation; dashed arrows denote supervision." aria-label="Enlarge attribute replacement and training diagram"><img src="assets/images/replacement.webp" alt="Diagram of local feature corrections, counterfactual reconstruction, and bidirectional attribute swapping." width="1857" height="847" loading="lazy"><span class="expand-mark" aria-hidden="true">↗</span></button></div></details>
+      </div>
+    </section>
+
+    <section class="section container" id="showcase">
+      <div class="section-heading heading-inline"><div><p class="eyebrow">03 / IN THE WORLD</p><h2>Same action.<br><em>Different consequences.</em></h2></div><p class="section-summary">Paired GTA V examples from the WorldRuler training-free H3 Ref2VA Turbo implementation. Both panels show generated video.</p></div>
+      <div class="showcase-layout">
+        <div class="case-tabs" role="tablist" aria-label="Choose a rule demonstration" aria-orientation="vertical">
+          <button class="case-tab active" id="tab-tank" role="tab" aria-selected="true" aria-controls="case-panel" tabindex="0" data-case="tank"><span class="case-number">01</span><span><strong>Shoot the tank</strong><span class="case-description">A shot triggers fire and smoke.<br>Compare the native effect enabled and disabled.</span></span><span class="case-arrow" aria-hidden="true">↗</span></button>
+          <button class="case-tab" id="tab-vehicle" role="tab" aria-selected="false" aria-controls="case-panel" tabindex="-1" data-case="vehicle"><span class="case-number">02</span><span><strong>Enter the vehicle</strong><span class="case-description">Entering a vehicle triggers smoke.<br>A custom visual effect, independent of damage.</span></span><span class="case-arrow" aria-hidden="true">↗</span></button>
+          <p class="showcase-note">These examples demonstrate the training-free implementation. They do not report results for the trained attribute writer.</p>
+        </div>
+        <div id="case-panel" role="tabpanel" aria-labelledby="tab-tank" tabindex="0">
+          <div class="comparison-title"><span id="case-kind">NATIVE EFFECT INTERVENTION</span><span id="case-duration">14 seconds</span></div>
+          <div class="comparison-videos">
+            <figure><div class="video-label"><span class="status-dot off"></span><span id="off-label">Effect disabled</span></div><video id="video-off" src="assets/videos/tank-off.mp4" poster="assets/images/tank-off.webp" preload="none" muted playsinline aria-label="Generated video with tank fire effect disabled"></video></figure>
+            <figure><div class="video-label"><span class="status-dot"></span><span id="on-label">Effect enabled</span></div><video id="video-on" src="assets/videos/tank-on.mp4" poster="assets/images/tank-on.webp" preload="none" muted playsinline aria-label="Generated video with tank fire effect enabled"></video></figure>
+          </div>
+          <div class="comparison-controls"><button id="pair-play" class="small-button"><span aria-hidden="true">▷</span> Play both</button><button id="pair-reset" class="icon-button" aria-label="Restart both comparison videos">↺</button><label class="sr-only" for="pair-seek">Comparison playback position</label><input id="pair-seek" type="range" min="0" max="14" value="0" step="0.05" aria-valuetext="0 seconds"><span class="time-display" id="pair-time">0:00 / 0:14</span></div>
+          <p class="comparison-caption" id="case-caption">Shoot the tank → fire and smoke. Compare generated continuations with the native effect enabled and disabled.</p>
+          <div class="video-links"><a id="off-link" href="assets/videos/tank-off.mp4" target="_blank" rel="noopener">Open disabled video ↗</a><a id="on-link" href="assets/videos/tank-on.mp4" target="_blank" rel="noopener">Open enabled video ↗</a></div>
+          <p class="player-message" id="pair-message" role="status"></p>
+          <noscript><p>Open the two video links to view the comparison. Switching cases and synchronized playback require JavaScript.</p></noscript>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tinted" id="walkthrough">
+      <div class="container">
+        <div class="section-heading heading-inline"><div><p class="eyebrow">04 / A RULE CHAIN, VISUALIZED</p><h2>From an action<br><em>to a world state.</em></h2></div><p class="section-summary">A temple walkthrough combines generated footage, reconstructed 3D geometry, and synchronized rule annotations.</p></div>
+        <div class="walkthrough-player"><video id="walkthrough-video" src="assets/videos/temple-walkthrough.mp4" poster="assets/images/temple-demo.webp" controls playsinline preload="none" aria-label="Illustrative temple walkthrough with 3D reconstruction and rule annotations"></video></div>
+        <div class="chapter-links" aria-label="Walkthrough chapters"><button data-time="0"><span>01</span> Approach</button><button data-time="5.45"><span>02</span> Attack</button><button data-time="8"><span>03</span> Collect the key</button><button data-time="10.35"><span>04</span> Reach the gate</button><button data-time="13.9"><span>05</span> Inspect the lock</button></div>
+        <div class="media-footnote"><p><strong>Illustrative visualization.</strong> The source is an H3 reference clip, augmented with offline 3D reconstruction and scripted rule annotations. It is not a recording of the full WorldRuler pipeline or a save-and-restore experiment. Uncertain visual events remain unconfirmed.</p><a href="assets/videos/temple-walkthrough.mp4" download>Download video <span aria-hidden="true">↓</span></a></div>
+      </div>
+    </section>
+
+    <section class="section container" id="ruleverse">
+      <div class="split-layout">
+        <div class="section-copy"><p class="eyebrow">05 / THE DATASET</p><h2>RuleVerse<span class="title-dot">.</span></h2><p class="dataset-tagline">One world.<br><em>Two possible outcomes.</em></p><p class="lead">Paired rule-driven interactions.<br>Collected in Habitat and GTA V.</p><p>Each pair shares the scene configuration and action intent, while a designated rule mechanism is enabled or disabled. The resulting videos capture different state evolutions, with annotations of states, events, and rule outcomes.</p><p>Scene-aware splits separate training and test groups. The collection pipeline covers object attributes, spatial relationships, and effects that begin outside the current view.</p></div>
+        <figure class="figure-block"><button class="figure-button" data-lightbox="assets/images/data-pipeline.webp" data-caption="RuleVerse data collection: scene grounding, task construction, paired recording, and annotation with checks." aria-label="Enlarge the RuleVerse collection pipeline"><img src="assets/images/data-pipeline.webp" alt="RuleVerse collection pipeline across Habitat and GTA V, from scene grounding to annotated rule-enabled and rule-disabled video pairs." width="2200" height="785" loading="lazy"><span class="expand-mark" aria-hidden="true">↗</span></button><figcaption><span>DATA COLLECTION</span> Shared scene and action intent. Controlled rule intervention. Paired observations.</figcaption></figure>
+      </div>
+      <dl class="stats"><div><dt>3,200</dt><dd>Paired interactions</dd></div><div><dt>6,400</dt><dd>Videos</dd></div><div><dt>2,900 <span>/ 300</span></dt><dd>Training / test pairs</dd></div><div><dt>2</dt><dd>Simulation environments</dd></div></dl>
+      <details class="method-detail"><summary><span>Explore rule combinations, object binding & activation timing</span><span class="detail-symbol" aria-hidden="true">＋</span></summary><div class="detail-content"><button class="figure-button" data-lightbox="assets/images/dataset-statistics.webp" data-caption="RuleVerse statistics across Habitat and GTA V: trigger–effect combinations, object binding types, and rule activation timing." aria-label="Enlarge RuleVerse dataset statistics"><img src="assets/images/dataset-statistics.webp" alt="RuleVerse statistics showing trigger-effect distributions, single-object and cross-object binding, and activation timing for Habitat and GTA V." width="2200" height="476" loading="lazy"><span class="expand-mark" aria-hidden="true">↗</span></button></div></details>
+    </section>
+
+    <section class="section section-tinted" id="evaluation"><div class="container"><div class="section-heading heading-inline"><div><p class="eyebrow">06 / WHAT WE EVALUATE</p><h2>Beyond appearance.<br><em>Does the rule hold?</em></h2></div><p class="section-summary">Evaluation considers both individual rule events and complete interaction chains.</p></div><div class="evaluation-grid"><article><span class="metric-abbr">RSR</span><div><h3>Rule-level success</h3><p>Does the effect happen to the correct object, under the correct trigger, at the right time—and persist as required?</p><div class="metric-tags"><span>Identity</span><span>Trigger</span><span>Effect</span><span>Timing</span><span>Hold</span></div></div></article><article><span class="metric-abbr">FCR</span><div><h3>Full-chain completion</h3><p>Do the required stages occur in the intended order, leading to the final task goal?</p><div class="metric-tags"><span>Stages</span><span>Order</span><span>Goal</span></div></div></article></div><p class="evaluation-note">The paper and full experimental results will be released here.</p></div></section>
+
+    <section class="section container" id="resources">
+      <div class="section-heading heading-inline"><div><p class="eyebrow">07 / RESOURCES</p><h2>Build on <em>WorldRuler.</em></h2></div><p class="section-summary">Paper, code, and data releases are forthcoming.</p></div>
+      <div class="resource-row"><div><span class="resource-icon" aria-hidden="true">↗</span><h3>Paper</h3><span class="release-status">Coming soon</span></div><div><span class="resource-icon" aria-hidden="true">⌘</span><h3>Code</h3><span class="release-status">Coming soon</span></div><div><span class="resource-icon" aria-hidden="true">◫</span><h3>RuleVerse</h3><span class="release-status">Coming soon</span></div></div>
+      <div class="citation"><div class="citation-header"><span>CITE THIS PROJECT PAGE</span><button id="copy-citation" class="small-button">Copy BibTeX <span aria-hidden="true">⧉</span></button></div><pre><code id="bibtex">@misc{zhai2026worldruler,
+  title  = {WorldRuler: Interactive World Modeling
+            under Configurable Rules},
+  author = {Zhai, Mingliang and Wu, Yuwei and Jia, Yunde
+            and Li, Chuanhao and Zhang, Kaipeng},
+  year   = {2026},
+  url    = {https://zmling22.github.io/WorldRuler-Homepage/},
+  note   = {Project page. Paper forthcoming.}
+}</code></pre><span id="copy-message" class="sr-only" role="status"></span></div>
+    </section>
+  </main>
+
+  <footer class="site-footer container"><div class="footer-top"><div><a class="footer-brand" href="#top">WorldRuler<span class="brand-dot">.</span></a><p>Define the rules. Preserve the world.</p></div><div class="footer-contact"><span class="mini-label">CONTACT</span><a href="mailto:wuyuwei@bit.edu.cn">wuyuwei@bit.edu.cn ↗</a><a href="mailto:chuanhao.li@shanda.com">chuanhao.li@shanda.com ↗</a><a href="mailto:kaipeng.zhang@shanda.com">kaipeng.zhang@shanda.com ↗</a></div></div><div class="footer-bottom"><span>ALAYA LAB · 2026</span><span>Visual direction inspired by <a href="https://alaya-lab.github.io/AlayaVista/" target="_blank" rel="noopener">AlayaVista ↗</a></span><a href="https://github.com/zmling22/WorldRuler-Homepage" target="_blank" rel="noopener">Website source ↗</a><a href="#top">Back to top ↑</a></div></footer>
+
+  <dialog id="image-dialog" class="image-dialog" aria-labelledby="dialog-caption"><button class="dialog-close" aria-label="Close enlarged figure">✕</button><img id="dialog-image" alt=""><p id="dialog-caption"></p><a id="dialog-download" class="small-button" href="assets/images/method.webp" target="_blank" rel="noopener">Open full-size image ↗</a></dialog>
+</body>
+</html>
