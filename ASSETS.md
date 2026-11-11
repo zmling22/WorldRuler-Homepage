@@ -26,8 +26,22 @@ Source run: `gtav_dlc_4x2_20261102_04`. The generated region was cropped from th
 | `tank-off.mp4` | `pair_0035_negative` | `bb2938a74234ce4c948c6d5377d99d98792707bddd251044089da0d92b865633` |
 | `vehicle-on.mp4` | `pair_0366_positive` | `30876d9cedaa32f09737dc2872b0d5b274481bee82a225532ac490720173422b` |
 | `vehicle-off.mp4` | `pair_0366_negative` | `4b2f927d27da9d0ee18b191661a8750f12510306b1d2562e0a644bc77802c10f` |
+| `flee-on.mp4` | `pair_0066_positive` | `0da3b308ca66002af15d6e80804aa193241073ffc1f9e4e1760f863393575a65` |
+| `flee-off.mp4` | `pair_0066_negative` | `a9587b0ea9c83668f175d2f26721f9911cd14c8246cd99df4b94b7350358c965` |
+| `hands-on.mp4` | `pair_0118_positive` | `83f346fc8e1e35ed4403436df1cb3f1251b4d4a77a59e45148468a3f707e0169` |
+| `hands-off.mp4` | `pair_0118_negative` | `c9c910f0d12b23efe1511195d3cff7ab3513718556869d94ea3e09412779d09c` |
+| `sunset-on.mp4` | `pair_0193_positive` | `c7dfb83d53dcdee68914a3883b1f5447f58e4c37794150ab603fde4b04fac7f9` |
+| `sunset-off.mp4` | `pair_0193_negative` | `da063ffa1837d5e0aeea70ac512ad10bd87aa7e1cb2532eed12f7ebf5e38ea8a` |
+| `disappear-on.mp4` | `pair_0260_positive` | `cc2a3f6882f4022d4f8ecf1cab29824cc632f6aa2d05d9f9f63d49ab078c58ce` |
+| `disappear-off.mp4` | `pair_0260_negative` | `2bb6ff04d1f140b0be6ca2c3027a1c7c0d24237a2475ee35a0003476d0e00330` |
+| `recolor-on.mp4` | `pair_0880_positive` | `cd1c7896e6c70a6d0d001f3ded52c35909a730ebc2ece44f7ee0cf901bc10ea6` |
+| `recolor-off.mp4` | `pair_0880_negative` | `cb1269f19d5e4a75a6739d9e3bcd6aff2d6726f7a3c640ed891d639443265761` |
+| `fog-on.mp4` | `pair_0926_positive` | `ad514f0d9ca508e4ca4c388d1af1bab71b069a3e216aa2f82f2f38cf64957d8e` |
+| `fog-off.mp4` | `pair_0926_negative` | `4ec1181e2160df823e9a64d613d5a5dd36cb2cbd7fb44507cef9028601879c7a` |
 
-The tank pair toggles native damage/effect behavior. The vehicle pair toggles a custom smoke visual effect on vehicle entry; smoke does not imply damage. The original clips' hashes match the source completion records and curated figure provenance. All source videos passed full decoding checks.
+The tank pair toggles native damage/effect behavior. The vehicle pair toggles a custom smoke visual effect on vehicle entry; smoke does not imply damage. Additional pairs cover gunfire-triggered fleeing, proximity-triggered hands-up and removal, vehicle-entry time changes, vehicle-opening paint changes, and fog. The disappearance example has less stable camera correspondence and temporal continuity. The fog example does not establish completion of the source's full rule chain.
+
+The original clips' hashes match the source completion records and curated figure provenance. All source videos passed full decoding checks.
 
 ## Illustrative temple environment
 

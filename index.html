@@ -14,6 +14,7 @@
   <link rel="canonical" href="https://zmling22.github.io/WorldRuler-Homepage/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <script src="showcase-data.js" defer></script>
   <script src="script.js" defer></script>
   <title>WorldRuler — Interactive World Modeling under Configurable Rules</title>
 </head>
@@ -91,14 +92,22 @@
 
     <section class="section container" id="showcase">
       <div class="section-heading heading-inline"><div><p class="eyebrow">03 / IN THE WORLD</p><h2>Same action.<br><em>Different consequences.</em></h2></div><p class="section-summary">Paired GTA V examples from the WorldRuler training-free H3 Ref2VA Turbo implementation. Both panels show generated video.</p></div>
-      <div class="showcase-layout">
-        <div class="case-tabs" role="tablist" aria-label="Choose a rule demonstration" aria-orientation="vertical">
-          <button class="case-tab active" id="tab-tank" role="tab" aria-selected="true" aria-controls="case-panel" tabindex="0" data-case="tank"><span class="case-number">01</span><span><strong>Shoot the tank</strong><span class="case-description">A shot triggers fire and smoke.<br>Compare the native effect enabled and disabled.</span></span><span class="case-arrow" aria-hidden="true">↗</span></button>
-          <button class="case-tab" id="tab-vehicle" role="tab" aria-selected="false" aria-controls="case-panel" tabindex="-1" data-case="vehicle"><span class="case-number">02</span><span><strong>Enter the vehicle</strong><span class="case-description">Entering a vehicle triggers smoke.<br>A custom visual effect, independent of damage.</span></span><span class="case-arrow" aria-hidden="true">↗</span></button>
-          <p class="showcase-note">These examples demonstrate the training-free implementation. They do not report results for the trained attribute writer.</p>
+      <div class="showcase-explorer">
+        <div class="showcase-toolbar">
+          <div class="showcase-filters" role="group" aria-label="Filter demonstrations by rule category">
+            <button class="filter-tag active" type="button" data-filter="all" aria-pressed="true">All examples <span data-count="all"></span></button>
+            <button class="filter-tag" type="button" data-filter="objects" aria-pressed="false">Object effects <span data-count="objects"></span></button>
+            <button class="filter-tag" type="button" data-filter="characters" aria-pressed="false">Characters <span data-count="characters"></span></button>
+            <button class="filter-tag" type="button" data-filter="world" aria-pressed="false">World state <span data-count="world"></span></button>
+          </div>
+          <span class="sample-count" id="sample-count" role="status"></span>
+        </div>
+        <div class="case-tabs" role="tablist" aria-label="Choose a paired rule demonstration" aria-orientation="horizontal">
+          <button class="case-tab active" id="tab-tank" role="tab" aria-selected="true" aria-controls="case-panel" tabindex="0" data-case="tank"><span class="case-number">01</span><span>Shoot the tank</span></button>
+          <button class="case-tab" id="tab-vehicle" role="tab" aria-selected="false" aria-controls="case-panel" tabindex="-1" data-case="vehicle"><span class="case-number">02</span><span>Enter → smoke</span></button>
         </div>
         <div id="case-panel" role="tabpanel" aria-labelledby="tab-tank" tabindex="0">
-          <div class="comparison-title"><span id="case-kind">NATIVE EFFECT INTERVENTION</span><span id="case-duration">14 seconds</span></div>
+          <div class="case-panel-heading"><h3 id="case-title">Shoot the tank → fire and smoke</h3><div class="comparison-title"><span id="case-kind">NATIVE EFFECT INTERVENTION</span><span id="case-duration">14 seconds</span></div></div>
           <div class="comparison-videos">
             <figure><div class="video-label"><span class="status-dot off"></span><span id="off-label">Effect disabled</span></div><video id="video-off" src="assets/videos/tank-off.mp4" poster="assets/images/tank-off.webp" preload="none" muted playsinline aria-label="Generated video with tank fire effect disabled"></video></figure>
             <figure><div class="video-label"><span class="status-dot"></span><span id="on-label">Effect enabled</span></div><video id="video-on" src="assets/videos/tank-on.mp4" poster="assets/images/tank-on.webp" preload="none" muted playsinline aria-label="Generated video with tank fire effect enabled"></video></figure>
@@ -109,6 +118,7 @@
           <p class="player-message" id="pair-message" role="status"></p>
           <noscript><p>Open the two video links to view the comparison. Switching cases and synchronized playback require JavaScript.</p></noscript>
         </div>
+        <p class="showcase-note">Both panels show generated video from the training-free implementation. These examples are not results of the trained attribute writer.</p>
       </div>
     </section>
 

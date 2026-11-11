@@ -32,16 +32,32 @@
   navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') { closeMenu(); menu.focus(); } });
 
-  const cases = {
-    tank: { prefix: 'tank', duration: 14, kind: 'NATIVE EFFECT INTERVENTION', label: 'Effect', caption: 'Shoot the tank → fire and smoke. Compare generated continuations with the native effect enabled and disabled.', accessible: 'tank fire effect' },
-    vehicle: { prefix: 'vehicle', duration: 22, kind: 'CUSTOM RULE', label: 'Rule', caption: 'Enter the vehicle → emit smoke. The custom rule requests a smoke visual effect; it does not imply vehicle damage.', accessible: 'vehicle-entry smoke rule' }
-  };
+  const examples = window.WORLD_RULER_SHOWCASE;
+  const cases = Object.fromEntries(examples.map((example) => [example.id, example]));
+  const tabList = $('.case-tabs');
+  tabList.replaceChildren(...examples.map((example, index) => {
+    const tab = document.createElement('button');
+    tab.type = 'button'; tab.className = 'case-tab'; tab.id = `tab-${example.id}`;
+    tab.dataset.case = example.id; tab.dataset.category = example.category;
+    tab.setAttribute('role', 'tab'); tab.setAttribute('aria-controls', 'case-panel');
+    tab.setAttribute('aria-selected', String(index === 0)); tab.tabIndex = index === 0 ? 0 : -1;
+    tab.classList.toggle('active', index === 0);
+    const number = document.createElement('span'); number.className = 'case-number';
+    number.textContent = String(index + 1).padStart(2, '0'); number.setAttribute('aria-hidden', 'true');
+    const title = document.createElement('span'); title.textContent = example.title;
+    tab.append(number, title);
+    return tab;
+  }));
+  document.querySelectorAll('[data-count]').forEach((label) => {
+    label.textContent = label.dataset.count === 'all' ? examples.length : examples.filter((example) => example.category === label.dataset.count).length;
+  });
+  $('#sample-count').textContent = `${examples.length} paired examples`;
   const off = $('#video-off');
   const on = $('#video-on');
   const playButton = $('#pair-play');
   const seek = $('#pair-seek');
   const panel = $('#case-panel');
-  let activeCase = cases.tank;
+  let activeCase = examples[0];
   let operation = 0;
   let playing = false;
   let requestedTime = 0;
@@ -79,6 +95,7 @@
     requestedTime = 0;
     tabs.forEach((item) => { const selected = item === tab; item.classList.toggle('active', selected); item.setAttribute('aria-selected', String(selected)); item.tabIndex = selected ? 0 : -1; });
     panel.setAttribute('aria-labelledby', tab.id);
+    $('#case-title').textContent = activeCase.heading;
     $('#case-kind').textContent = activeCase.kind;
     $('#case-duration').textContent = `${activeCase.duration} seconds`;
     $('#case-caption').textContent = activeCase.caption;
@@ -95,17 +112,27 @@
     seek.max = activeCase.duration;
     renderTime();
   }
-  tabs.forEach((tab, index) => {
+  tabs.forEach((tab) => {
     tab.addEventListener('click', () => selectCase(tab));
     tab.addEventListener('keydown', (event) => {
+      const visible = tabs.filter((item) => !item.hidden);
+      const index = visible.indexOf(tab);
       let next;
-      if (['ArrowDown', 'ArrowRight'].includes(event.key)) next = (index + 1) % tabs.length;
-      if (['ArrowUp', 'ArrowLeft'].includes(event.key)) next = (index + tabs.length - 1) % tabs.length;
+      if (['ArrowDown', 'ArrowRight'].includes(event.key)) next = (index + 1) % visible.length;
+      if (['ArrowUp', 'ArrowLeft'].includes(event.key)) next = (index + visible.length - 1) % visible.length;
       if (event.key === 'Home') next = 0;
-      if (event.key === 'End') next = tabs.length - 1;
-      if (next !== undefined) { event.preventDefault(); selectCase(tabs[next]); tabs[next].focus(); }
+      if (event.key === 'End') next = visible.length - 1;
+      if (next !== undefined) { event.preventDefault(); selectCase(visible[next]); visible[next].focus(); }
     });
   });
+  const filters = [...document.querySelectorAll('[data-filter]')];
+  filters.forEach((filter) => filter.addEventListener('click', () => {
+    filters.forEach((item) => { const selected = item === filter; item.classList.toggle('active', selected); item.setAttribute('aria-pressed', String(selected)); });
+    tabs.forEach((tab) => { tab.hidden = filter.dataset.filter !== 'all' && tab.dataset.category !== filter.dataset.filter; });
+    const visible = tabs.filter((tab) => !tab.hidden);
+    if (visible.length && !visible.some((tab) => tab.dataset.case === activeCase.id)) selectCase(visible[0]);
+    $('#sample-count').textContent = `${visible.length} of ${examples.length} paired examples`;
+  }));
 
   const walkthrough = $('#walkthrough-video');
   document.querySelectorAll('[data-time]').forEach((button) => button.addEventListener('click', () => {
