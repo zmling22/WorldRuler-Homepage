@@ -22,8 +22,8 @@ GitHub Pages publishes the root directory of the `main` branch. `.nojekyll` keep
 
 - `index.html`: research narrative, authors, demonstrations, dataset, and citation.
 - `styles.css`: responsive visual design inspired by [AlayaVista](https://alaya-lab.github.io/AlayaVista/).
-- `showcase-data.js`: three selected demonstrations (two pairs and one single video), rule descriptions, categories, durations, and media filenames.
-- `script.js`: category filters, keyboard-accessible sample tags, paired and single-video playback, chapter navigation, figure viewer, motion controls, and citation copying.
+- `showcase-data.js`: eight paired demonstrations, rule descriptions, categories, durations, and media filenames.
+- `script.js`: category filters, keyboard-accessible sample tags, synchronized comparisons, chapter navigation, figure viewer, motion controls, and citation copying.
 - `assets/`: optimized project-owned figures and video derivatives.
 - [ASSETS.md](ASSETS.md): media provenance and interpretation.
 

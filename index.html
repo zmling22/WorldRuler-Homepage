@@ -91,7 +91,7 @@
     </section>
 
     <section class="section container" id="showcase">
-      <div class="section-heading heading-inline"><div><p class="eyebrow">03 / IN THE WORLD</p><h2>See the rules<br><em>in action.</em></h2></div><p class="section-summary">Selected GTA V demonstrations from the WorldRuler training-free H3 Ref2VA Turbo implementation. Explore a rule, watch the action, and see the response.</p></div>
+      <div class="section-heading heading-inline"><div><p class="eyebrow">03 / IN THE WORLD</p><h2>Same action.<br><em>Different consequences.</em></h2></div><p class="section-summary">Paired GTA V examples from the WorldRuler training-free H3 Ref2VA Turbo implementation. Both panels show generated video.</p></div>
       <div class="showcase-explorer">
         <div class="showcase-toolbar">
           <div class="showcase-filters" role="group" aria-label="Filter demonstrations by rule category">
@@ -102,19 +102,19 @@
           </div>
           <span class="sample-count" id="sample-count" role="status"></span>
         </div>
-        <div class="case-tabs" role="tablist" aria-label="Choose a rule demonstration" aria-orientation="horizontal">
-          <button class="case-tab active" id="tab-hands" role="tab" aria-selected="true" aria-controls="case-panel" tabindex="0" data-case="hands"><span class="case-number">01</span><span>Approach → hands up</span></button>
-          <button class="case-tab" id="tab-tank" role="tab" aria-selected="false" aria-controls="case-panel" tabindex="-1" data-case="tank"><span class="case-number">02</span><span>Shoot the tank</span></button>
+        <div class="case-tabs" role="tablist" aria-label="Choose a paired rule demonstration" aria-orientation="horizontal">
+          <button class="case-tab active" id="tab-tank" role="tab" aria-selected="true" aria-controls="case-panel" tabindex="0" data-case="tank"><span class="case-number">01</span><span>Shoot the tank</span></button>
+          <button class="case-tab" id="tab-vehicle" role="tab" aria-selected="false" aria-controls="case-panel" tabindex="-1" data-case="vehicle"><span class="case-number">02</span><span>Enter → smoke</span></button>
         </div>
-        <div id="case-panel" role="tabpanel" aria-labelledby="tab-hands" tabindex="0">
-          <div class="case-panel-heading"><h3 id="case-title">Approach the character → hands up</h3><div class="comparison-title"><span id="case-kind">PROXIMITY RULE</span><span id="case-duration">11 seconds</span></div></div>
+        <div id="case-panel" role="tabpanel" aria-labelledby="tab-tank" tabindex="0">
+          <div class="case-panel-heading"><h3 id="case-title">Shoot the tank → fire and smoke</h3><div class="comparison-title"><span id="case-kind">NATIVE EFFECT INTERVENTION</span><span id="case-duration">14 seconds</span></div></div>
           <div class="comparison-videos">
-            <figure><div class="video-label"><span class="status-dot off"></span><span id="off-label">Rule disabled</span></div><video id="video-off" src="assets/videos/hands-off.mp4" poster="assets/images/hands-off.webp" preload="none" muted playsinline aria-label="Generated video with proximity-triggered hands-up rule disabled"></video></figure>
-            <figure><div class="video-label"><span class="status-dot"></span><span id="on-label">Rule enabled</span></div><video id="video-on" src="assets/videos/hands-on.mp4" poster="assets/images/hands-on.webp" preload="none" muted playsinline aria-label="Generated video with proximity-triggered hands-up rule enabled"></video></figure>
+            <figure><div class="video-label"><span class="status-dot off"></span><span id="off-label">Effect disabled</span></div><video id="video-off" src="assets/videos/tank-off.mp4" poster="assets/images/tank-off.webp" preload="none" muted playsinline aria-label="Generated video with tank fire effect disabled"></video></figure>
+            <figure><div class="video-label"><span class="status-dot"></span><span id="on-label">Effect enabled</span></div><video id="video-on" src="assets/videos/tank-on.mp4" poster="assets/images/tank-on.webp" preload="none" muted playsinline aria-label="Generated video with tank fire effect enabled"></video></figure>
           </div>
-          <div class="comparison-controls"><button id="pair-play" class="small-button"><span aria-hidden="true">▷</span> Play both</button><button id="pair-reset" class="icon-button" aria-label="Restart both comparison videos">↺</button><label class="sr-only" for="pair-seek">Comparison playback position</label><input id="pair-seek" type="range" min="0" max="11" value="0" step="0.05" aria-valuetext="0 seconds"><span class="time-display" id="pair-time">0:00 / 0:11</span></div>
-          <p class="comparison-caption" id="case-caption">The rule asks the target character to raise both hands when the player comes within 2.5 metres.</p>
-          <div class="video-links"><a id="off-link" href="assets/videos/hands-off.mp4" target="_blank" rel="noopener">Open disabled video ↗</a><a id="on-link" href="assets/videos/hands-on.mp4" target="_blank" rel="noopener">Open enabled video ↗</a></div>
+          <div class="comparison-controls"><button id="pair-play" class="small-button"><span aria-hidden="true">▷</span> Play both</button><button id="pair-reset" class="icon-button" aria-label="Restart both comparison videos">↺</button><label class="sr-only" for="pair-seek">Comparison playback position</label><input id="pair-seek" type="range" min="0" max="14" value="0" step="0.05" aria-valuetext="0 seconds"><span class="time-display" id="pair-time">0:00 / 0:14</span></div>
+          <p class="comparison-caption" id="case-caption">Shoot the tank → fire and smoke. Compare generated continuations with the native effect enabled and disabled.</p>
+          <div class="video-links"><a id="off-link" href="assets/videos/tank-off.mp4" target="_blank" rel="noopener">Open disabled video ↗</a><a id="on-link" href="assets/videos/tank-on.mp4" target="_blank" rel="noopener">Open enabled video ↗</a></div>
           <p class="player-message" id="pair-message" role="status"></p>
           <noscript><p>Open the two video links to view the comparison. Switching cases and synchronized playback require JavaScript.</p></noscript>
         </div>
